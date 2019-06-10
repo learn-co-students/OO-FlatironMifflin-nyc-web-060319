@@ -15,6 +15,10 @@ class Employee
         @@all
     end
 
+    def self.all=(val)
+        @@all = val
+    end
+
     def paid_over
         paid_over_employees = []
         @@all.each do |employee|
@@ -41,5 +45,15 @@ class Employee
             end
         end
         other_tax_bracket_employees
+    end
+
+    def self.find_by_department(department_name)
+        Manager.all.each do |manager|
+            if manager.department == department_name
+                #binding.pry
+                return manager.employees.first
+            end
+        end
+        nil
     end
 end

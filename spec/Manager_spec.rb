@@ -3,10 +3,16 @@ require_relative "../lib/Manager.rb"
 
 RSpec.describe Manager do
     before(:all) do 
+        Manager.all = []
         @michael = Manager.new("Michael", "Regional Manager", 57)
         #@jim = Employee.new("Jim", 100_000, "Michael")
         @michael.hire_employee("Jim", 100_000)
         @dwight = Manager.new("Dwight", "Sales", 47)
+    end
+
+    after(:all) do
+        Manager.all = []
+        Employee.all = []
     end
 
     it "Can be initialized" do 

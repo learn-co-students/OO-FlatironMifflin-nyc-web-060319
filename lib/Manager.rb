@@ -20,12 +20,18 @@ class Manager
     def self.all
         @@all
     end
+
+    def self.all=(val)
+        @@all = val
+    end
     
     def self.average_age
         total_age = 0
-        @@all.each do |manager| 
+        @@all.each do |manager|
+            #binding.pry
             total_age += manager.age
         end
+        #binding.pry
         average = (total_age.to_f / @@all.length.to_f)
         average
     end

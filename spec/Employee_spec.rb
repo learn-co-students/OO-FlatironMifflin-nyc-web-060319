@@ -4,7 +4,16 @@ RSpec.describe Employee do
     before(:all) do
         @employee = Employee.new("Jim", 100_000, "Dwight")
         @other_employee = Employee.new("Pam", 99_500, "Dwight")
-        @stanley = Employee.new("Stanley", 200_000, "Dwight") 
+        @stanley = Employee.new("Stanley", 200_000, "Dwight")
+        @dwight = Manager.new("Dwight", "Sales", 47) 
+        @dwight.employees << @employee
+        @dwight.employees << @other_employee
+        @dwight.employees << @stanley
+    end
+
+    after(:all) do
+        Manager.all = []
+        Employee.all = []
     end
 
     it "Can be initialized" do 
@@ -37,7 +46,7 @@ RSpec.describe Employee do
     end
 
     it "#find_by_department" do
-        expect(false).to eq(true)
+        expect(Employee.find_by_department("Sales")).to eq(@employee)
     end
 
     it "#tax_bracket returns all the employees whose salaries are within $1000 (± 1000) of the employee who invoked the method" do
